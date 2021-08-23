@@ -3,13 +3,9 @@ import * as github from "@actions/github";
 
 async function action() {
   const token = core.getInput("token");
-  if (token === "") {
-    throw new Error("Invalid token provided");
-  }
+  const owner = core.getInput("org");
   const repo = core.getInput("repo");
-  if (repo === "") {
-    throw new Error("Invalid repo provided");
-  }
+
   const workflow_id = core.getInput("workflow_id");
   if (workflow_id === "") {
     throw new Error("Invalid workflow_id provided");
@@ -17,7 +13,7 @@ async function action() {
   const octokit = github.getOctokit(token);
   /* cspell: disable-next-line */
   const tagsResults = await octokit.rest.repos.listTags({
-    owner: "zuplo",
+    owner,
     repo,
     per_page: 1,
   });
@@ -40,7 +36,7 @@ async function action() {
     /* cspell: disable-next-line */
     "POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches",
     {
-      owner: "zuplo",
+      owner,
       repo,
       workflow_id,
       ref,

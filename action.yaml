@@ -1,6 +1,9 @@
 name: "Dispatch Workflow on Latest Tag"
 description: "Runs a workflow on the specified repositories newest tag."
 inputs:
+  org:
+    description: "The name of the github org"
+    required: true
   repo:
     description: "The name of the github repo"
     required: true

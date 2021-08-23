@@ -1,0 +1,15 @@
+name: "Dispatch Workflow on Latest Tag"
+description: "Runs a workflow on the specified repositories newest tag."
+inputs:
+  repo:
+    description: "The name of the github repo"
+    required: true
+  workflow_id:
+    description: "The workflow to run"
+    required: true
+  token:
+    description: "The github token"
+    required: true
+runs:
+  using: "node12"
+  main: "dist/index.js"
